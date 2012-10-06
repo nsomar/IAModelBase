@@ -1,4 +1,4 @@
-    //
+//
 //  ViewController.m
 //  RKTestApp
 //
@@ -30,22 +30,6 @@
     NSDictionary *dic = [str JSONValue];
     
     MostPopular *mostPopular = [[MostPopular alloc] initWithDictionary:dic];
-}
-
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
-{
-    
-}
-
-- (void)viewDidUnload
-{
-    [super viewDidUnload];
-    // Release any retained subviews of the main view.
-}
-
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
-{
-    return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
 }
 
 @end
