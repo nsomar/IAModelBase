@@ -173,10 +173,11 @@
     if (!keyWithNoSuffix) {
         keyWithNoSuffix = [self keyByRemovingFinalSuffixOrNil:key];
     }
-    
-    if (keyWithNoSuffix) {
-        keyWithNoSuffix = [keyWithNoSuffix capitalizedString];
-    }
+    // this will change the class name to lowercase
+    // if the class has more uppercase characters this function will occer a bug
+//    if (keyWithNoSuffix) {
+//        keyWithNoSuffix = [keyWithNoSuffix capitalizedString];
+//    }
     
     return NSClassFromString(keyWithNoSuffix);
 }
