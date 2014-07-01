@@ -161,7 +161,7 @@
     if (key) {
         for (NSString *suffix in suffixes)
         {
-            if ([key rangeOfString:suffix].location != NSNotFound)
+            if ([key hasSuffix:suffix])
             {
                 keyWithNoSuffix = [self keyNameByRemovingSuffixOrNil:key
                                                               suffix:suffix];
@@ -185,8 +185,9 @@
 - (NSString *) keyNameByRemovingSuffixOrNil:(NSString *)key
                                      suffix:(NSString*) suffix
 {
-    int location = [key rangeOfString:suffix].location;
+    int location = key.length - suffix.length;
     NSString *keyWithNoSuffix = [key substringToIndex:location];
+    
     
     return keyWithNoSuffix;
 }
