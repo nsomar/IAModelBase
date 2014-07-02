@@ -128,7 +128,10 @@
              withEntryClass:(Class) class
 {
     NSMutableArray *retArray = [[NSMutableArray alloc] init];
-    
+    if (![array isKindOfClass:[NSArray class]]) {
+        id entry = [[class alloc] initWithDictionary:array];
+        [retArray addObject:entry];
+    } else
     for (id arrayEntry in array) {
         id entry = [[class alloc] initWithDictionary:arrayEntry];
         [retArray addObject:entry];
