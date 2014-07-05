@@ -8,6 +8,7 @@
 
 #import "IAModelBase.h"
 #import <objc/runtime.h>
+#import "IAModelCollectionBase.h"
 
 @interface IAModelBase ()
 @property (nonatomic, strong) NSDictionary *dictionaryOfKeysToKeys;
