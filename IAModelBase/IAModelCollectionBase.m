@@ -45,7 +45,7 @@
     return [self class];
 }
 
-- (int) count
+- (NSUInteger) count
 {
     return [collection count];
 }
