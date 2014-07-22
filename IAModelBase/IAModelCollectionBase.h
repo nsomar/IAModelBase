@@ -13,7 +13,7 @@
 
 - (Class) classForModelBase;
 
-- (int) count;
+- (NSUInteger) count;
 - (void) addEntry:(IAModelBase*) entry;
 - (IAModelBase*) entryAtIndex:(int)index;
 @end

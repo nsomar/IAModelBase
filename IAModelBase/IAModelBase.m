@@ -8,6 +8,7 @@
 
 #import "IAModelBase.h"
 #import <objc/runtime.h>
+#import "IAModelCollectionBase.h"
 
 @interface IAModelBase ()
 @property (nonatomic, strong) NSDictionary *dictionaryOfKeysToKeys;
@@ -128,7 +129,10 @@
              withEntryClass:(Class) class
 {
     NSMutableArray *retArray = [[NSMutableArray alloc] init];
-    
+    if ([array isKindOfClass:[NSDictionary class]]) {
+        id entry = [[class alloc] initWithDictionary:(NSDictionary *)array];
+        [retArray addObject:entry];
+    } else
     for (id arrayEntry in array) {
         id entry = [[class alloc] initWithDictionary:arrayEntry];
         [retArray addObject:entry];
@@ -161,7 +165,7 @@
     if (key) {
         for (NSString *suffix in suffixes)
         {
-            if ([key rangeOfString:suffix].location != NSNotFound)
+            if ([key hasSuffix:suffix])
             {
                 keyWithNoSuffix = [self keyNameByRemovingSuffixOrNil:key
                                                               suffix:suffix];
@@ -173,10 +177,11 @@
     if (!keyWithNoSuffix) {
         keyWithNoSuffix = [self keyByRemovingFinalSuffixOrNil:key];
     }
-    
-    if (keyWithNoSuffix) {
-        keyWithNoSuffix = [keyWithNoSuffix capitalizedString];
-    }
+    // this will change the class name to lowercase
+    // if the class has more uppercase characters this function will occer a bug
+//    if (keyWithNoSuffix) {
+//        keyWithNoSuffix = [keyWithNoSuffix capitalizedString];
+//    }
     
     return NSClassFromString(keyWithNoSuffix);
 }
@@ -184,8 +189,9 @@
 - (NSString *) keyNameByRemovingSuffixOrNil:(NSString *)key
                                      suffix:(NSString*) suffix
 {
-    int location = [key rangeOfString:suffix].location;
+    int location = key.length - suffix.length;
     NSString *keyWithNoSuffix = [key substringToIndex:location];
+    
     
     return keyWithNoSuffix;
 }
